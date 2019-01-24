@@ -12,7 +12,11 @@ class SquashfuseConan(ConanFile):
     settings = "os", "compiler", "build_type", "arch"
     generators = ["cmake"]
     exports_sources = "patches/*"
-    build_requires = ["lzma/5.2.4@bincrafters/stable", "fuse/2.9.9@azubieta/stable"]
+
+    def requirements(self):
+        self.requires("zlib/1.2.8@conan/stable", private=False)
+        self.requires("lzma/5.2.4@bincrafters/stable", private=False)
+        self.requires("fuse/2.9.9@azubieta/stable", private=True)
 
     def source(self):
         git = tools.Git(folder="squashfuse.git")
@@ -30,7 +34,7 @@ class SquashfuseConan(ConanFile):
         env_build_vars = autotools.vars
         self.run("cd squashfuse.git && ./autogen.sh")
 
-        lzma_libs_dir = self.deps_cpp_info["lzma"].lib_paths[0];
+        lzma_libs_dir = self.deps_cpp_info["lzma"].lib_paths[0]
         autotools.configure(configure_dir="squashfuse.git", vars=env_build_vars,
                             args=["--disable-demo", "--disable-high-level", "--without-lzo", "--without-lz4",
                                   "--with-xz=%s" % lzma_libs_dir])
@@ -51,4 +55,4 @@ class SquashfuseConan(ConanFile):
         self.copy("*.pc", dst="lib/pkgconfig", keep_path=False)
 
     def package_info(self):
-        self.cpp_info.libs = ["squashfuse", "lzma", "z"]
+        self.cpp_info.libs = ["squashfuse"]
