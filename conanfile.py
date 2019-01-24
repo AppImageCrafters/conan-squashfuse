@@ -12,7 +12,7 @@ class SquashfuseConan(ConanFile):
     settings = "os", "compiler", "build_type", "arch"
     generators = "cmake"
     exports_sources = "patches/*"
-    build_requires = "lzma/5.2.4@bincrafters/stable"
+    build_requires = ["lzma/5.2.4@bincrafters/stable", "fuse/2.9.9@azubieta/stable"]
 
     def source(self):
         git = tools.Git(folder="squashfuse.git")
