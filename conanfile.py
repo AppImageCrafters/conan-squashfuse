@@ -10,7 +10,7 @@ class SquashfuseConan(ConanFile):
     description = "Squashfuse with patches for using it as a library in libappimage"
     topics = ("squashfs",)
     settings = "os", "compiler", "build_type", "arch"
-    generators = "cmake"
+    generators = ["cmake"]
     exports_sources = "patches/*"
     build_requires = ["lzma/5.2.4@bincrafters/stable", "fuse/2.9.9@azubieta/stable"]
 
@@ -48,6 +48,7 @@ class SquashfuseConan(ConanFile):
         self.copy("*.h", dst="include", src="squashfuse.git")
         self.copy("config.h", dst="include", src=".")
         self.copy("*.a", dst="lib", keep_path=False)
+        self.copy("*.pc", dst="lib/pkgconfig", keep_path=False)
 
     def package_info(self):
         self.cpp_info.libs = ["squashfuse", "lzma", "z"]
