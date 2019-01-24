@@ -10,13 +10,21 @@ class SquashfuseConan(ConanFile):
     description = "Squashfuse with patches for using it as a library in libappimage"
     topics = ("squashfs",)
     settings = "os", "compiler", "build_type", "arch"
+    options = {"shared": [True, False], "fPIC": [True, False]}
+    default_options = {"shared": False , "fPIC": True}
     generators = ["cmake"]
     exports_sources = "patches/*"
 
     def requirements(self):
-        self.requires("zlib/1.2.8@conan/stable", private=False)
+        self.requires("zlib/1.2.11@conan/stable", private=False)
         self.requires("lzma/5.2.4@bincrafters/stable", private=False)
         self.requires("fuse/2.9.9@azubieta/stable", private=True)
+
+    def configure(self):
+        self.options["zlib"].shared = self.options.shared
+        self.options["zlib"].fPIC = self.options.fPIC
+        self.options["lzma"].shared = self.options.shared
+        self.options["lzma"].fPIC = self.options.fPIC
 
     def source(self):
         git = tools.Git(folder="squashfuse.git")

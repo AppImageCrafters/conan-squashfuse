@@ -6,7 +6,7 @@ from conans import ConanFile, CMake, tools
 class SquashfuseTestConan(ConanFile):
     settings = "os", "compiler", "build_type", "arch"
     generators = "cmake"
-    build_requires = ["lzma/5.2.4@bincrafters/stable", "zlib/1.2.9@conan/stable"]
+    build_requires = ["lzma/5.2.4@bincrafters/stable"]
 
     def build(self):
         cmake = CMake(self)
