@@ -12,8 +12,7 @@ class SquashfuseConan(ConanFile):
     settings = "os", "compiler", "build_type", "arch"
     options = {"shared": [True, False], "fPIC": [True, False]}
     default_options = {"shared": False , "fPIC": True}
-    generators = ["cmake"]
-    exports_sources = "patches/*"
+    exports_sources = ["patches/*", "pkgconfig/*"]
 
     def requirements(self):
         self.requires("zlib/1.2.11@conan/stable", private=False)
@@ -57,6 +56,7 @@ class SquashfuseConan(ConanFile):
         autotools.install(vars=env_build_vars)
 
     def package(self):
+        self.copy(pattern="COPYING", dst="licenses", src=".")
         self.copy("*.h", dst="include", src="squashfuse.git")
         self.copy("config.h", dst="include", src=".")
         self.copy("*.a", dst="lib", keep_path=False)
