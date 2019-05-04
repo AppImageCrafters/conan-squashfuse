@@ -11,13 +11,22 @@ class SquashfuseConan(ConanFile):
     topics = ("squashfs",)
     settings = "os", "compiler", "build_type", "arch"
     options = {"shared": [True, False], "fPIC": [True, False]}
-    default_options = {"shared": False , "fPIC": True}
+    default_options = {"shared": False, "fPIC": True}
     exports_sources = ["patches/*", "pkgconfig/*"]
     generators = ["pkg_config"]
 
     def requirements(self):
         self.requires("zlib/1.2.11@conan/stable", private=False)
         self.requires("lzma/5.2.4@bincrafters/stable", private=False)
+
+    def system_requirements(self):
+        pack_name = None
+        if tools.os_info.linux_distro == "ubuntu":
+            pack_name = "libfuse-dev"
+
+        if pack_name:
+            installer = tools.SystemPackageTool()
+            installer.install(pack_name)
 
     def configure(self):
         self.options["zlib"].shared = self.options.shared
