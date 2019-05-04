@@ -22,7 +22,7 @@ matrix:
    include:
 
       - <<: *linux
-        env: CONAN_GCC_VERSIONS=4.8 CONAN_DOCKER_IMAGE=conanio/gcc48 CONAN_UPLOAD_DEPENDENCIES="all"
+        env: CONAN_GCC_VERSIONS=4.8 CONAN_DOCKER_IMAGE=conanio/gcc48 CONAN_UPLOAD_DEPENDENCIES="all" CONAN_ARCHS="x86_64"
 
 install:
   - chmod +x .travis/install.sh
