@@ -18,7 +18,6 @@ class SquashfuseConan(ConanFile):
     def requirements(self):
         self.requires("zlib/1.2.11@conan/stable", private=False)
         self.requires("lzma/5.2.4@bincrafters/stable", private=False)
-        self.requires("fuse/2.9.9@appimage-conan-community/stable", private=False)
 
     def configure(self):
         self.options["zlib"].shared = self.options.shared
