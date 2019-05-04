@@ -5,7 +5,7 @@ from conans import ConanFile, CMake, tools
 
 class SquashfuseTestConan(ConanFile):
     settings = "os", "compiler", "build_type", "arch"
-    generators = ["pkg_config", "cmake"]
+    generators = ["pkg_config"]
 
     def build(self):
         cmake = CMake(self)

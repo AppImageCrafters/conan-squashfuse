@@ -13,6 +13,7 @@ class SquashfuseConan(ConanFile):
     options = {"shared": [True, False], "fPIC": [True, False]}
     default_options = {"shared": False , "fPIC": True}
     exports_sources = ["patches/*", "pkgconfig/*"]
+    generators = ["pkg_config"]
 
     def requirements(self):
         self.requires("zlib/1.2.11@conan/stable", private=False)
