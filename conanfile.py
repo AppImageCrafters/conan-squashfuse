@@ -28,12 +28,6 @@ class SquashfuseConan(ConanFile):
             installer = tools.SystemPackageTool()
             installer.install(pack_name)
 
-    def configure(self):
-        self.options["zlib"].shared = self.options.shared
-        self.options["zlib"].fPIC = self.options.fPIC
-        self.options["lzma"].shared = self.options.shared
-        self.options["lzma"].fPIC = self.options.fPIC
-
     def source(self):
         git = tools.Git(folder="squashfuse.git")
         git.clone("https://github.com/vasi/squashfuse.git")
