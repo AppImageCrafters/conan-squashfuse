@@ -9,4 +9,4 @@ Version: 0.1.103
 
 Requires:
 Libs: -L${libdir} -lsquashfuse -lsquashfuse_ll
-Cflags: -I${includedir} -I${includedir}/squashfuse
+Cflags: -I${includedir} -I${includedir}
