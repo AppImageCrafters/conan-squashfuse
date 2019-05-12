@@ -63,7 +63,8 @@ class SquashfuseConan(ConanFile):
         self.copy("*.h", dst="include", src="squashfuse.git")
         self.copy("config.h", dst="include", src=".")
         self.copy("*.a", dst="lib", keep_path=False)
-        self.copy("*.pc", dst="lib/pkgconfig", keep_path=False)
+        self.copy("squashfuse.pc", src="pkgconfig", dst="lib/pkgconfig", keep_path=False)
 
     def package_info(self):
-        self.cpp_info.libs = ["squashfuse"]
+        self.cpp_info.libs = ["squashfuse", "squashfuse_ll"]
+        self.cpp_info.builddirs = ["lib/pkgconfig"]

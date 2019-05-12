@@ -1,12 +1,10 @@
 prefix=/usr
-exec_prefix=${prefix}
 libdir=${prefix}/lib
 includedir=${prefix}/include
 
 Name: squashfuse
-Description: squashfuse library to mount squashfs archives
+Description: Squashfuse with patches for using it as a library in libappimage
 Version: 0.1.103
-
-Requires:
-Libs: -L${libdir} -lsquashfuse -lsquashfuse_ll
-Cflags: -I${includedir} -I${includedir}
+Libs: -L${libdir} -lsquashfuse  -lsquashfuse_ll  -Wl,-rpath="${libdir}"
+Cflags: -I${includedir}
+Requires: zlib lzma
