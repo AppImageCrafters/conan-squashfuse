@@ -63,8 +63,9 @@ class SquashfuseConan(ConanFile):
         self.copy("*.h", dst="include", src="squashfuse.git")
         self.copy("config.h", dst="include", src=".")
         self.copy("*.a", dst="lib", keep_path=False)
-        self.copy("squashfuse.pc", src="pkgconfig", dst="lib/pkgconfig", keep_path=False)
+        # CMake (v3.14.3) still  doesn't support relocatable pkg-config files therefore including them is error prone
+        # self.copy("squashfuse.pc", src="pkgconfig", dst="lib/pkgconfig", keep_path=False)
 
     def package_info(self):
         self.cpp_info.libs = ["squashfuse", "squashfuse_ll"]
-        self.cpp_info.builddirs = ["lib/pkgconfig"]
+        # self.cpp_info.builddirs = ["lib/pkgconfig"]
